@@ -7,6 +7,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Plane, Menu, X, ArrowRight, UserCheck, ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { AgriWingLogo } from '../common/AgriWingLogo';
 
 interface PublicNavbarProps {
   onBookClick: () => void;
@@ -153,11 +154,8 @@ export const PublicFooter: React.FC = () => {
     <footer className="w-full bg-slate-950 border-t border-slate-800/80 py-14 text-slate-400 text-xs">
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
-          <div className="flex items-center gap-2.5 text-white font-bold text-base mb-3">
-            <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center">
-              <Plane className="w-4 h-4 text-white -rotate-45" />
-            </div>
-            <span>AgriWing Technologies</span>
+          <div className="mb-4">
+            <AgriWingLogo size="lg" showText={true} />
           </div>
           <p className="text-slate-400 leading-relaxed">
             Enterprise precision agriculture drone spraying and 4K multispectral crop diagnostic intelligence. DGCA-certified operations nationwide.
