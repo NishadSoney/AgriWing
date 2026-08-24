@@ -98,11 +98,20 @@ interface AppContextType {
   // Navigation & Modal State
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  activeFarmerTab: 'overview' | 'fields' | 'reports' | 'bookings' | 'subscription' | 'weather';
+  setActiveFarmerTab: (tab: 'overview' | 'fields' | 'reports' | 'bookings' | 'subscription' | 'weather') => void;
+  activeOperatorTab: 'missions' | 'fleet' | 'reports_repo' | 'analytics';
+  setActiveOperatorTab: (tab: 'missions' | 'fleet' | 'reports_repo' | 'analytics') => void;
   selectedFieldId: string | null;
   setSelectedFieldId: (id: string | null) => void;
   selectedReportId: string | null;
   setSelectedReportId: (id: string | null) => void;
   
+  isSearchOpen: boolean;
+  setIsSearchOpen: (open: boolean) => void;
+  isNotificationDrawerOpen: boolean;
+  setIsNotificationDrawerOpen: (open: boolean) => void;
+
   isBookModalOpen: boolean;
   setIsBookModalOpen: (open: boolean) => void;
   preselectedBookingFieldId: string | null;
@@ -152,6 +161,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [role, setRoleState] = useState<Role>('public');
   const [language, setLanguageState] = useState<'en' | 'hi'>('en');
   const [activeTab, setActiveTab] = useState<string>('overview');
+  const [activeFarmerTab, setActiveFarmerTab] = useState<'overview' | 'fields' | 'reports' | 'bookings' | 'subscription' | 'weather'>('overview');
+  const [activeOperatorTab, setActiveOperatorTab] = useState<'missions' | 'fleet' | 'reports_repo' | 'analytics'>('missions');
+
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isNotificationDrawerOpen, setIsNotificationDrawerOpen] = useState(false);
 
   // Core entities with persistent backing
   const [farmers] = useState<Farmer[]>(() => getStoredOrInitial('farmers', INITIAL_FARMERS));
@@ -534,10 +548,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         markAllAlertsAsRead,
         activeTab,
         setActiveTab,
+        activeFarmerTab,
+        setActiveFarmerTab,
+        activeOperatorTab,
+        setActiveOperatorTab,
         selectedFieldId,
         setSelectedFieldId,
         selectedReportId,
         setSelectedReportId,
+        isSearchOpen,
+        setIsSearchOpen,
+        isNotificationDrawerOpen,
+        setIsNotificationDrawerOpen,
         isBookModalOpen,
         setIsBookModalOpen,
         preselectedBookingFieldId,

@@ -1,14 +1,16 @@
 /**
  * @file App.tsx
- * @description Root application shell with dynamic role-based persona routing,
- * universal toast management, and global booking modal dialogs.
+ * @description Root application shell with unified navigation, role-based persona routing,
+ * Spotlight search (Ctrl+K), notification drawer, and global modal management.
  */
 
 import React, { useState } from 'react';
 import { AppProvider, useApp } from './context/AppContext';
-import { RoleSwitcherBar } from './components/common/RoleSwitcherBar';
+import { UnifiedNavbar } from './components/common/UnifiedNavbar';
+import { GlobalSearchModal } from './components/common/GlobalSearchModal';
+import { NotificationDrawer } from './components/common/NotificationDrawer';
 import { Toast } from './components/common/Toast';
-import { PublicNavbar, PublicFooter } from './components/public/PublicNavbar';
+import { PublicFooter } from './components/public/PublicNavbar';
 import { HeroSection } from './components/public/HeroSection';
 import { HowItWorksSection } from './components/public/HowItWorksSection';
 import { ServicesAndPricingSection } from './components/public/ServicesAndPricingSection';
@@ -30,13 +32,12 @@ const MainContent: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-white">
-      {/* Top Universal Persona Switcher & Language Bar */}
-      <RoleSwitcherBar />
+      {/* Sleek, Role-Aware Unified Navigation Bar */}
+      <UnifiedNavbar onBookClick={() => handleOpenBookModal()} />
 
-      {/* Role-Based Rendering */}
+      {/* Role-Based Dynamic Page Views */}
       {role === 'public' && (
         <main className="w-full flex-1 flex flex-col">
-          <PublicNavbar onBookClick={() => handleOpenBookModal()} />
           <HeroSection onBookClick={() => handleOpenBookModal()} />
           <HowItWorksSection onBookClick={() => handleOpenBookModal()} />
           <ServicesAndPricingSection onSelectPlan={(planId) => handleOpenBookModal(planId)} />
@@ -59,7 +60,13 @@ const MainContent: React.FC = () => {
         </main>
       )}
 
-      {/* Universal Toast Notifications */}
+      {/* Global Spotlight Search Modal (Ctrl+K) */}
+      <GlobalSearchModal />
+
+      {/* Slide-over Notification Center Drawer */}
+      <NotificationDrawer />
+
+      {/* Universal Toast Notification Feedback */}
       <Toast />
 
       {/* Global Booking / Demo Modal */}
