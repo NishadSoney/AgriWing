@@ -255,10 +255,12 @@ export const OperatorDashboard: React.FC = () => {
               </div>
             </div>
 
-            {/* Bookings Dispatch Queue Table */}
+            {/* Bookings Dispatch Queue Table (Desktop Table & Mobile Responsive Cards) */}
             <div className="bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden shadow-xl">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
+              
+              {/* Desktop Table View (Hidden on mobile < md) */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full min-w-[850px] text-left text-xs">
                   <thead className="bg-slate-950 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
                     <tr>
                       <th className="p-4">Booking Info</th>
@@ -349,7 +351,7 @@ export const OperatorDashboard: React.FC = () => {
                                   className="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 shadow-sm cursor-pointer"
                                 >
                                   <UploadCloud className="w-3.5 h-3.5" />
-                                  <span>Upload Flight Telemetry</span>
+                                  <span>Upload Telemetry</span>
                                 </button>
                               )}
 
@@ -376,6 +378,97 @@ export const OperatorDashboard: React.FC = () => {
                     )}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Mobile Card List (Visible on mobile < md) */}
+              <div className="block md:hidden divide-y divide-slate-800">
+                {filteredBookings.length === 0 ? (
+                  <div className="p-8 text-center text-slate-400">
+                    <Plane className="w-8 h-8 text-slate-600 mx-auto mb-2" />
+                    <p className="text-xs">No missions match the selected filter criteria.</p>
+                  </div>
+                ) : (
+                  filteredBookings.map((b) => (
+                    <div key={b.id} className="p-4 space-y-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <p className="font-mono font-bold text-white text-xs">{b.bookingNumber}</p>
+                          <p className="font-semibold text-emerald-400 text-xs mt-0.5 capitalize">{b.serviceType.replace(/_/g, ' ')}</p>
+                        </div>
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${
+                          b.status === 'completed'
+                            ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                            : b.status === 'scheduled'
+                            ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
+                            : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                        }`}>
+                          {b.status}
+                        </span>
+                      </div>
+
+                      <div className="text-xs text-slate-300 space-y-1 bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Farmer:</span>
+                          <span className="text-white font-medium">{b.farmerName} ({b.farmerPhone})</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Plot:</span>
+                          <span className="text-white">{b.fieldName} &bull; {b.acres}A</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Time:</span>
+                          <span className="text-white">{b.scheduledDate || b.preferredDate} ({b.scheduledTime || b.preferredTimeSlot})</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Pilot/Drone:</span>
+                          <span className={b.pilotName ? 'text-teal-300 font-semibold' : 'text-amber-400'}>
+                            {b.pilotName ? `${b.pilotName} (${b.droneModel})` : 'Unassigned'}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Mobile Action Buttons */}
+                      <div>
+                        {b.status === 'pending' && (
+                          <button
+                            onClick={() => setSelectedBookingForAssign(b)}
+                            className="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                          >
+                            <UserCheck className="w-4 h-4" />
+                            <span>Assign Pilot &amp; Drone</span>
+                          </button>
+                        )}
+
+                        {b.status === 'scheduled' && (
+                          <button
+                            onClick={() => setSelectedBookingForUpload(b.id)}
+                            className="w-full py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                          >
+                            <UploadCloud className="w-4 h-4" />
+                            <span>Upload Flight Telemetry</span>
+                          </button>
+                        )}
+
+                        {b.status === 'completed' && (
+                          <button
+                            onClick={() => {
+                              const relatedReport = reports.find(r => r.bookingId === b.id || r.fieldId === b.fieldId);
+                              if (relatedReport) {
+                                setViewingReportId(relatedReport.id);
+                              } else {
+                                setSelectedFlightForReport(flights[0]?.id || null);
+                              }
+                            }}
+                            className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                          >
+                            <Eye className="w-4 h-4" />
+                            <span>View 4K Health Report</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>

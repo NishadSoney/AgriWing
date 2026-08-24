@@ -66,10 +66,10 @@ export const HeroSection: React.FC<{ onBookClick: () => void }> = ({ onBookClick
           </p>
 
           {/* Action CTAs */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
+          <div className="mt-8 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-3.5 max-w-xl mx-auto">
             <button
               onClick={onBookClick}
-              className="px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm sm:text-base shadow-lg shadow-emerald-950/50 hover:scale-[1.01] active:scale-[0.99] transition flex items-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto justify-center px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm sm:text-base shadow-lg shadow-emerald-950/50 hover:scale-[1.01] active:scale-[0.99] transition flex items-center gap-2 cursor-pointer"
             >
               <Plane className="w-4 h-4 -rotate-45" />
               <span>{isHindi ? 'ड्रोन सेवा तुरंत बुक करें' : 'Book a Drone Spray / Demo'}</span>
@@ -78,7 +78,7 @@ export const HeroSection: React.FC<{ onBookClick: () => void }> = ({ onBookClick
 
             <button
               onClick={() => setRole('farmer')}
-              className="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold text-sm sm:text-base border border-slate-800 hover:border-slate-700 transition flex items-center gap-2 cursor-pointer shadow-sm"
+              className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold text-sm sm:text-base border border-slate-800 hover:border-slate-700 transition flex items-center gap-2 cursor-pointer shadow-sm"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               <span>{isHindi ? 'किसान डैशबोर्ड देखें' : 'Try Farmer Portal Demo'}</span>
@@ -86,7 +86,7 @@ export const HeroSection: React.FC<{ onBookClick: () => void }> = ({ onBookClick
 
             <a
               href="tel:1800-889-AGRI"
-              className="px-5 py-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white font-medium text-xs sm:text-sm border border-slate-800/80 flex items-center gap-2 transition"
+              className="w-full sm:w-auto justify-center px-5 py-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white font-medium text-xs sm:text-sm border border-slate-800/80 flex items-center gap-2 transition"
             >
               <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
               <span>Kisan Line: 1800-889-2474</span>
@@ -94,7 +94,7 @@ export const HeroSection: React.FC<{ onBookClick: () => void }> = ({ onBookClick
           </div>
 
           {/* Quick trust metrics */}
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-6 border-t border-slate-800/80">
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto pt-6 border-t border-slate-800/80">
             <div className="text-center">
               <p className="text-2xl sm:text-3xl font-bold text-white font-mono">45,000+</p>
               <p className="text-xs text-slate-400 mt-0.5">{isHindi ? 'एकड़ स्प्रे पूरा हुआ' : 'Acres Precision Sprayed'}</p>

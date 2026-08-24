@@ -215,12 +215,12 @@ export const GovtSchemesSection: React.FC<{ onBookClick: () => void }> = ({ onBo
                 <span className="font-semibold text-white">Zero Hassle Guarantee:</span> AgriWing generates and attaches digital flight receipts directly for your subsidy claim.
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
                 <a
                   href={scheme.officialPortalUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 flex items-center gap-1.5"
+                  className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 flex items-center gap-1.5 cursor-pointer"
                 >
                   <span>Official Portal</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -228,7 +228,7 @@ export const GovtSchemesSection: React.FC<{ onBookClick: () => void }> = ({ onBo
 
                 <button
                   onClick={onBookClick}
-                  className="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition"
+                  className="w-full sm:w-auto justify-center px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition cursor-pointer"
                 >
                   Book with Subsidy
                 </button>

@@ -141,8 +141,8 @@ export const HowItWorksSection: React.FC<{ onBookClick: () => void }> = ({ onBoo
             </p>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+          <div className="overflow-x-auto pb-2">
+            <table className="w-full min-w-[520px] text-left text-sm">
               <thead>
                 <tr className="border-b border-slate-800 text-xs text-slate-400">
                   <th className="pb-3 font-semibold">Feature / Metric</th>
