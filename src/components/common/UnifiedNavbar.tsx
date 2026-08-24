@@ -25,6 +25,8 @@ import {
   MapPin
 } from 'lucide-react';
 
+import { AgriWingLogo } from './AgriWingLogo';
+
 interface UnifiedNavbarProps {
   onBookClick?: () => void;
 }
@@ -113,18 +115,19 @@ export const UnifiedNavbar: React.FC<UnifiedNavbarProps> = ({ onBookClick }) => 
           <div className="flex items-center gap-3 shrink-0">
             <div 
               onClick={() => handleScrollTo('#')}
-              className="flex items-center gap-2.5 cursor-pointer group select-none"
+              className="cursor-pointer group select-none flex items-center gap-2"
             >
-              <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center shadow-md shadow-emerald-950/50 group-hover:scale-105 transition-transform">
-                <Plane className="w-5 h-5 text-white -rotate-45" />
-              </div>
-              <div className="flex flex-col">
+              <AgriWingLogo size="md" showText={false} />
+              <div className="flex flex-col leading-none">
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-base sm:text-lg tracking-tight text-white">AgriWing</span>
+                  <span className="font-extrabold text-base sm:text-lg tracking-tight text-white">
+                    Agri<span className="text-emerald-400">Wing</span>
+                  </span>
                   <span className="px-1.5 py-0.2 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold rounded uppercase border border-emerald-500/20">
                     {role === 'public' ? 'Precision Ag' : role === 'farmer' ? 'Farmer Hub' : 'Mission Control'}
                   </span>
                 </div>
+                <span className="font-mono text-[10px] text-slate-400 mt-0.5">Enterprise Drone Analytics</span>
               </div>
             </div>
 
